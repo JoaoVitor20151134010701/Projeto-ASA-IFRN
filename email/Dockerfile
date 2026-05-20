@@ -33,4 +33,4 @@ EXPOSE 143/tcp
 VOLUME ["/var/mail/vmail"]
 
 
-CMD ["sh", "-c", "/usr/local/bin/mail.sh ; service syslog-ng start ; service postfix start ; service dovecot start ; tail -F /var/log/mail.log"]
+CMD ["sh", "-c", "touch /var/log/mail.log && /usr/local/bin/mail.sh && service syslog-ng start && service postfix start && service dovecot start && tail -F /var/log/mail.log"]

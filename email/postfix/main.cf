@@ -2,7 +2,6 @@ compatibility_level = 3.9
 
 myhostname = mail.jonas.lan
 myorigin = jonas.lan
-#myorigin = $myhostname
 
 smtpd_banner = $myhostname ESMTP $mail_name (Jonas Mail Server)
 
@@ -10,8 +9,6 @@ inet_protocols = ipv4
 
 mynetworks_style = subnet
 mynetworks = 127.0.0.0/8, 192.168.0.0/16, 10.0.0.0/8, 172.16.0.0/12
-
-#delay_warning_time = 4h
 
 mydestination = localhost, localhost.localdomain, jonas.lan, mail.jonas.lan
 home_mailbox = Maildir/
@@ -39,3 +36,14 @@ smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
 smtpd_relay_restrictions = permit_mynetworks permit_sasl_authenticated defer_unauth_destination
 
 inet_interfaces = all
+
+# --- Integração de Autenticação SASL via Dovecot (Essencial para Envio do Thunderbird) ---
+smtpd_sasl_type = dovecot
+smtpd_sasl_path = private/auth
+smtpd_sasl_auth_enable = yes
+broken_sasl_auth_clients = yes
+
+smtpd_recipient_restrictions =
+    permit_sasl_authenticated,
+    permit_mynetworks,
+    reject_unauth_destination

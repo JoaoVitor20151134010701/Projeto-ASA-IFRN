@@ -1,26 +1,36 @@
 #!/bin/bash
 
-# Criando a pasta raiz onde todos os e-mails ficarão centralizados para persistência
+# Ativa a porta 587 (Submission) no arquivo master.cf do Postfix
+sed -i 's/#submission inet n/submission inet n/g' /etc/postfix/master.cf
+
+# Garante que o diretório base dos e-mails existe
 mkdir -p /var/mail/vmail
 
-# Função p criar usuário
+# Função para criar o usuário no sistema Linux
 criar_usuario() {
     local user=$1
     local name=$2
+    
+    # Verifica se o usuário já existe para não quebrar em reinícios
     if ! id "$user" &>/dev/null; then
-        # Define a home do usuário dentro da pasta que será persistida
-        # Adicionado "|| true" para ignorar se o Linux reclamar do chown automático do useradd no volume
         useradd -c "$name" -d /var/mail/vmail/$user -m -s /bin/false "$user" || true
         echo "$user:123456" | chpasswd
     fi
+
+    # Garante a criação da estrutura de pastas Maildir obrigatória para o Dovecot
+    mkdir -p /var/mail/vmail/$user/Maildir/{cur,new,tmp}
 }
 
-#contas
+# --- Criação das Contas de E-mail ---
 criar_usuario "tech" "tech"
 criar_usuario "suport" "suport"
-criar_usuario "user" "user"
+criar_usuario "usuario" "usuario"
 criar_usuario "redes" "redes"
 
-#permissões
-chown -R mail:mail /var/mail/vmail || true
-chmod -R 770 /var/mail/vmail || true
+# --- Aplicação Rígida de Permissões ---
+for user in tech suport usuario redes; do
+    if [ -d "/var/mail/vmail/$user" ]; then
+        chown -R "$user:$user" "/var/mail/vmail/$user"
+        chmod -R 700 "/var/mail/vmail/$user"
+    fi
+done

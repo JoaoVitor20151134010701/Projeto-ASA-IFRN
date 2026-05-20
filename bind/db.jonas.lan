@@ -1,26 +1,23 @@
 $TTL    604800
-@   IN  SOA ns.jonas.lan. root.jonas.lan. (
-                  7        ; Serial
-             604800        ; Refresh
-              86400        ; Retry
-            2419200        ; Expire
-             604800 )      ; Negative Cache TTL
-;
-@       IN  NS      ns.jonas.lan.
+@       IN      SOA     ns.jonas.lan. admin.jonas.lan. (
+                        2026052001 ; Serial
+                        604800     ; Refresh
+                        86400      ; Retry
+                        2419200    ; Expire
+                        604800 )   ; Negative Cache TTL
 
-; Servidor DNS
-ns      IN  A       172.25.0.3
+; Nameservers
+        IN      NS      ns.jonas.lan.
 
-; Servidor de e-mail
-mail    IN  A       172.25.0.20
-@       IN  MX  10  mail.jonas.lan.
+; Hosts (Apontando para o localhost onde as portas estão expostas)
+ns          IN      A       127.0.0.1
+jonastech   IN      A       127.0.0.1
+jonasredes  IN      A       127.0.0.1
+jonasti     IN      A       127.0.0.1
+mail        IN      A       127.0.0.1
+@   IN  MX 10 mail.jonas.lan.
 
-; Sites
-site1   IN  A       172.25.0.5
-site2   IN  A       172.25.0.4
-site3   IN  A       172.25.0.2
-
-; Aliases opcionais
-www     IN  CNAME   site1
-portal  IN  CNAME   site2
-webmail IN  CNAME   mail
+; Aliases
+www         IN      CNAME   jonastech.jonas.lan.
+portal      IN      CNAME   jonasredes.jonas.lan.
+webmail     IN      CNAME   mail.jonas.lan.
