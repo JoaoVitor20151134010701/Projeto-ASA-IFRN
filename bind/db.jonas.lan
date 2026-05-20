@@ -1,0 +1,26 @@
+$TTL    604800
+@   IN  SOA ns.jonas.lan. root.jonas.lan. (
+                  7        ; Serial
+             604800        ; Refresh
+              86400        ; Retry
+            2419200        ; Expire
+             604800 )      ; Negative Cache TTL
+;
+@       IN  NS      ns.jonas.lan.
+
+; Servidor DNS
+ns      IN  A       172.25.0.3
+
+; Servidor de e-mail
+mail    IN  A       172.25.0.20
+@       IN  MX  10  mail.jonas.lan.
+
+; Sites
+site1   IN  A       172.25.0.5
+site2   IN  A       172.25.0.4
+site3   IN  A       172.25.0.2
+
+; Aliases opcionais
+www     IN  CNAME   site1
+portal  IN  CNAME   site2
+webmail IN  CNAME   mail
