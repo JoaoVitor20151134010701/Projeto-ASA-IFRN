@@ -1,13 +1,13 @@
 $TTL    604800
 
-@       IN      SOA     ns.jonaslab.test. admin.jonaslab.test. (
+@       IN      SOA     ns.dsrjoaovitor. admin.dsrjoaovitor. (
                         2026052204
                         604800
                         86400
                         2419200
                         604800 )
 
-        IN      NS      ns.jonaslab.test.
+        IN      NS      ns.dsrjoaovitor.
 
 ; DNS Server
 ns              IN      A       192.168.0.4
@@ -21,9 +21,10 @@ jonasti         IN      A       192.168.0.4
 mail            IN      A       192.168.0.4
 
 ; MX Record
-@               IN      MX 10   mail.jonaslab.test.
+@               IN      MX 10   mail.dsrjoaovitor.
 
 ; Aliases
-www             IN      CNAME   jonastech.jonaslab.test.
-portal          IN      CNAME   jonasredes.jonaslab.test.
-webmail         IN      CNAME   mail.jonaslab.test.
+www             IN      CNAME   jonastech.dsrjoaovitor.
+portal          IN      CNAME   jonasredes.dsrjoaovitor.
+webmail         IN      CNAME   mail.dsrjoaovitor.
+

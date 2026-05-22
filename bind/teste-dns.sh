@@ -1,16 +1,16 @@
 #!/bin/sh
 
-echo "=== Testando zona forward jonas.lan ==="
-dig @127.0.0.1 site1.jonas.lan
-dig @127.0.0.1 site2.jonas.lan
-dig @127.0.0.1 site3.jonas.lan
-dig @127.0.0.1 mail.jonas.lan
-dig @127.0.0.1 ns.jonas.lan
+echo "=== Testando zona forward dsrjoaovitor ==="
+dig @127.0.0.1 site1.dsrjoaovitor
+dig @127.0.0.1 site2.dsrjoaovitor
+dig @127.0.0.1 site3.dsrjoaovitor
+dig @127.0.0.1 mail.dsrjoaovitor
+dig @127.0.0.1 ns.dsrjoaovitor
 
 echo "=== Testando aliases ==="
-dig @127.0.0.1 www.jonas.lan
-dig @127.0.0.1 portal.jonas.lan
-dig @127.0.0.1 webmail.jonas.lan
+dig @127.0.0.1 www.dsrjoaovitor
+dig @127.0.0.1 portal.dsrjoaovitor
+dig @127.0.0.1 webmail.dsrjoaovitor
 
 echo "=== Testando zona reverse 25.172.in-addr.arpa ==="
 dig -x 172.25.0.2 @127.0.0.1

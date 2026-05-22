@@ -3,8 +3,8 @@ services:
     image: internetsystemsconsortium/bind9:9.18
     container_name: dns
     ports:
-      - "53:53/tcp"
-      - "53:53/udp"
+      - "8053:53/tcp"
+      - "8053:53/udp"
     networks:
       - jon-network
     volumes:
