@@ -3,69 +3,165 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>dsrjoaovitor - Inovação e Tecnologia</title>
+    <title>dsrjoaovitor — Inovação e Tecnologia</title>
     <style>
+        :root {
+            --bg-color: #0b0f19;
+            --text-color: #f3f4f6;
+            --text-secondary: #9ca3af;
+            --accent-color: #00ffa3; /* Verde neon tecnológico */
+            --border-color: #1f2937;
+        }
+
         body {
-            font-family: sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
+            line-height: 1.6;
         }
+
         header {
-            background-color: #0056b3;
-            color: white;
-            padding: 20px 0;
+            padding: 60px 20px 20px 20px;
             text-align: center;
         }
+
+        header h1 {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 0 0 10px 0;
+            letter-spacing: -1px;
+        }
+
+        header p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin: 0;
+        }
+
         nav {
             text-align: center;
-            background-color: #e0e0e0;
-            padding: 10px 0;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            background-color: rgba(11, 15, 25, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 100;
         }
+
         nav a {
-            margin: 0 15px;
+            margin: 0 20px;
             text-decoration: none;
-            color: #0056b3;
-            font-weight: bold;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
         }
+
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
         .container {
-            width: 80%;
-            margin: 20px auto;
-            overflow: hidden;
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 0 20px;
         }
+
         .main-content {
-            padding: 20px;
-            background-color: white;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
+            padding: 40px 0;
+            border-bottom: 1px solid var(--border-color);
         }
+
+        .main-content:last-child {
+            border-bottom: none;
+        }
+
+        h2 {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.4rem;
+            color: var(--accent-color);
+            margin-top: 0;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        ul li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 12px;
+            color: var(--text-color);
+        }
+
+        ul li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+        }
+
+        .contato-info {
+            font-family: 'Courier New', Courier, monospace;
+            margin-top: 15px;
+        }
+
+        .contato-info p {
+            margin: 5px 0;
+            font-size: 0.95rem;
+        }
+
+        .contato-info span {
+            color: var(--text-color);
+        }
+
         footer {
             text-align: center;
-            padding: 20px;
-            background-color: #333;
-            color: white;
-            margin-top: 20px;
+            padding: 40px 20px;
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            letter-spacing: 0.5px;
         }
     </style>
 </head>
 <body>
+
     <header>
-        <h1>dsrjoaovitor</h1>
-        <p>Inovação e Tecnologia para o Futuro</p>
+        <h1>dsrjoaovitor_</h1>
+        <p>Inovação e tecnologia para o futuro.</p>
     </header>
+
     <nav>
-        <a href="#sobre">Sobre Nós</a>
-        <a href="#servicos">Serviços</a>
-        <a href="#contato">Contato</a>
+        <a href="#sobre">// sobre</a>
+        <a href="#servicos">// serviços</a>
+        <a href="#contato">// contato</a>
     </nav>
+
     <div class="container">
         <section id="sobre" class="main-content">
-            <h2>Sobre a dsrjoaovitor</h2>
-            <p>Somos uma empresa dedicada a oferecer soluções tecnológicas inovadoras que impulsionam o crescimento e a eficiência dos nossos clientes. Com uma equipe experiente e apaixonada por tecnologia, buscamos sempre superar as expectativas.</p>
+            <h2>01. Sobre</h2>
+            <p>Somos uma empresa dedicada a desenvolver soluções tecnológicas sob medida. Combinamos engenharia de software e design minimalista para impulsionar a eficiência e transformar a infraestrutura digital dos nossos parceiros.</p>
         </section>
+
         <section id="servicos" class="main-content">
-            <h2>Nossos Serviços</h2>
+            <h2>02. Serviços</h2>
             <ul>
                 <li>Desenvolvimento de Software</li>
                 <li>Consultoria em TI</li>
@@ -74,15 +170,20 @@
                 <li>Cibersegurança</li>
             </ul>
         </section>
+
         <section id="contato" class="main-content">
-            <h2>Entre em Contato</h2>
-            <p>Tem um projeto em mente? Fale conosco!</p>
-            <p>Email: contato@dsrjoaovitor.com.br</p>
-            <p>Telefone: (XX) XXXX-XXXX</p>
+            <h2>03. Contato</h2>
+            <p>Pronto para iniciar a próxima iteração do seu projeto? Conecte-se conosco.</p>
+            <div class="contato-info">
+                <p>Email: <span>contato@dsrjoaovitor.com.br</span></p>
+                <p>Telefone: <span>(XX) XXXX-XXXX</span></p>
+            </div>
         </section>
     </div>
+
     <footer>
-        <p>&copy; 2026 dsrjoaovitor - Todos os direitos reservados</p>
+        <p>&copy; 2026 dsrjoaovitor. [root@system]</p>
     </footer>
+
 </body>
 </html>

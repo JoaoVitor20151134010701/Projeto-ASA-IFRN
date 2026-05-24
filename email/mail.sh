@@ -26,6 +26,8 @@ criar_usuario "tech" "tech"
 criar_usuario "suport" "suport"
 criar_usuario "usuario" "usuario"
 criar_usuario "redes" "redes"
+criar_usuario "joao" "joao"
+criar_usuario "maria" "maria"
 
 # --- Aplicação Rígida de Permissões ---
 for user in tech suport usuario redes; do
