@@ -1,194 +1,51 @@
-# BIND-PROXY-WEB
 
-Projeto desenvolvido para a disciplina de Administração de Sistemas Abertos (ASA), utilizando Docker Desktop, VSCode, BIND9, NGINX, Postfix, Dovecot e Thunderbird.
 
----
+Este trabalho tem como finalidade a construção de uma infraestrutura de rede integrada, contemplando serviços essenciais como DNS, proxy reverso e servidores de e-mail. A proposta busca não apenas demonstrar a configuração técnica desses serviços, mas também apresentar uma visão prática de como eles podem ser organizados em um ambiente real de administração de sistemas.
 
-# Objetivo do Projeto
+No projeto, o Bind é utilizado para a resolução de nomes e gerenciamento de zonas DNS, permitindo que diferentes domínios sejam configurados e resolvidos de forma eficiente. O Postfix e o Dovecot são empregados para a implementação do serviço de correio eletrônico, garantindo suporte a caixas postais virtuais, autenticação segura e armazenamento de mensagens. Já o Nginx atua como proxy reverso, responsável por direcionar requisições HTTP para diferentes sites hospedados, otimizando o acesso e oferecendo flexibilidade na gestão de múltiplos serviços web.
 
-Implementar uma infraestrutura completa contendo:
+Toda a infraestrutura é organizada por meio de Docker Compose, o que possibilita modularidade, isolamento de serviços e facilidade de manutenção. Os diretórios do projeto estão estruturados para separar claramente cada componente: configurações de DNS, arquivos de e-mail, scripts de automação, proxy e páginas web estáticas. Essa organização facilita tanto o estudo quanto a replicação do ambiente.
 
-- Servidor DNS utilizando BIND9
-- Reverse Proxy utilizando NGINX
-- 3 websites independentes
-- Servidor de e-mail com Postfix + Dovecot
-- Persistência de usuários e caixas de e-mail
-- Testes de envio e recebimento utilizando Thunderbird
-- Ambiente totalmente containerizado com Docker
+Além da parte técnica, o projeto serve como base para aprendizado acadêmico e prático, permitindo que estudantes e profissionais compreendam de forma aplicada conceitos de redes, servidores e administração de sistemas. A integração entre os serviços demonstra como diferentes tecnologias podem trabalhar em conjunto para formar uma rede funcional, segura e escalável.
 
----
-
-# Tecnologias Utilizadas
-
-- Docker Desktop
-- Docker Compose
-- Ubuntu 22.04
-- BIND9
-- NGINX
-- Postfix
-- Dovecot
-- Mozilla Thunderbird
-- VSCode
-
----
-
-# Estrutura do Projeto
-
-```bash
-bind-proxy-web/
-│
-├── bind/
+tree
+.
+├── README.md
+├── bind
 │   ├── bind.keys
 │   ├── db.10.24.6
-│   ├── db.jonaslab.test
-│   ├── named.conf
-│   └── teste-dns.sh
-│
-├── email/
-│   ├── dovecot/
+│   └── named.conf
+├── compose.yaml
+├── email
+│   ├── Dockerfile
+│   ├── dovecot
 │   │   ├── 10-auth.conf
 │   │   ├── 10-mail.conf
 │   │   ├── 10-master.conf
 │   │   └── 10-ssl.conf
-│   │
-│   ├── postfix/
-│   │   └── main.cf
-│   │
-│   ├── vmail/
-│   ├── Dockerfile
 │   ├── mail.sh
-│   └── mailname
-│
-├── proxy/
+│   ├── mailname
+│   ├── postfix
+│   │   └── main.cf
+│   └── vmail
+│       ├── redes
+│       ├── suport
+│       ├── tech
+│       │   └── Maildir
+│       │       ├── dovecot-uidlist
+│       │       ├── dovecot-uidvalidity
+│       │       ├── dovecot-uidvalidity.6a0dfd6b
+│       │       ├── dovecot.index.log
+│       │       ├── dovecot.mailbox.log
+│       │       └── subscriptions
+│       └── usuario
+├── proxy
 │   └── default.conf
-│
-├── web/
-│   ├── site1/
-│   ├── site2/
-│   └── site3/
-│
-└── compose.yaml
-
-
-Arquitetura da Solução
-DNS (BIND9)
-
-Responsável pela resolução dos domínios:
-
-jonastech.jonaslab.test
-jonasredes.jonaslab.test
-jonasti.jonaslab.test
-mail.jonaslab.test
-
-
-Reverse Proxy (NGINX)
-
-O proxy recebe as requisições HTTP e redireciona para:
-
-Domínio	Container
-jonastech.jonaslab.test	site1
-jonasredes.jonaslab.test	site2
-jonasti.jonaslab.test	site3
-
-Websites
-
-Cada website possui:
-
-Página HTML personalizada
-Identidade visual própria
-Conteúdo institucional independente
-
-
-Servidor de E-mail
-
-Implementado utilizando:
-
-Postfix → envio SMTP
-Dovecot → recebimento IMAP/POP3
-
-Contas de E-mail               Criadas
-Usuários Email	               Senha
-tech	tech@jonaslab.test	   123456
-suport	suport@jonaslab.test   123456
-usuario	usuario@jonaslab.test  123456
-redes	redes@jonaslab.test	   123456
-
-Persistência de Dados
-
-Foi implementada persistência utilizando Docker Volumes:
-
-volumes:
-  - vmail-data:/var/mail/vmail
-
-Isso garante que:
-
-usuários continuem existindo
-e-mails não sejam perdidos
-caixas postais sejam preservadas
-
-mesmo após remoção dos containers.
-
-Configuração DNS no Windows
-
-Para funcionamento local:
-
-IPv4 configurado manualmente
-DNS apontando para:
-127.0.0.1
-
-O IPv6 foi desativado temporariamente para evitar conflito de resolução DNS local.
-
-Como Executar o Projeto
-Subir os containers
-docker compose up -d
-
-Verificar containers
-docker ps
-
-Testar DNS
-nslookup jonastech.jonaslab.test
-
-Acessar os Sites
-http://jonastech.jonaslab.test
-http://jonasredes.jonaslab.test
-http://jonasti.jonaslab.test
-
-Configuração Thunderbird
-
-Servidor IMAP
-
-Campo	    Valor
-Servidor	mail.jonaslab.test
-Porta	    143
-Segurança	Nenhum
-
-Servidor SMTP
-
-Campo	    Valor
-Servidor	mail.jonaslab.test
-Porta	    587
-Segurança	Nenhum
-
-
-Testes Realizados
-Resolução DNS
-Reverse Proxy
-Acesso simultâneo aos 3 sites
-Envio de e-mails
-Recebimento de e-mails
-Persistência de dados
-Comunicação entre containers
-
-
-Observações
-
-Este projeto foi desenvolvido exclusivamente para fins acadêmicos e laboratoriais.
-
-Os certificados SSL utilizados são autoassinados (snakeoil).
-
-
-
-
-Autor
-
-Jonas Campos Amorim
+└── web
+    ├── site1
+    │   └── index.html
+    ├── site2
+    │   └── index.html
+    └── site3
+    
+Autor: JOÃO VITOR DOS SANTOS NASCIMENTO
